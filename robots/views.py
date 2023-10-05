@@ -1,3 +1,5 @@
+import os
+
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import FileResponse
 from django.http import JsonResponse
@@ -6,6 +8,7 @@ from django.views.decorators.http import require_http_methods
 
 from robots.models import Robot
 from utils.error_handlers import error_handler
+from utils.excel_functions import create_report
 from utils.validators import validate_robot_data
 
 
@@ -25,5 +28,10 @@ def add(request: WSGIRequest) -> JsonResponse:
     return JsonResponse(data={}, status=201)
 
 
+@error_handler
+@require_http_methods(["GET"])
 def report(request: WSGIRequest) -> FileResponse:
-    pass
+    create_report()
+    return FileResponse(
+        open(str(os.environ.get("PATH_FOR_ROBOT_REPORT")), "rb")
+    )
