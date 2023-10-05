@@ -1,7 +1,10 @@
 # Create your views here.
-def add(request) -> None:
+from django.core.handlers.wsgi import WSGIRequest
+
+
+def add(request: WSGIRequest) -> None:
     return None
 
 
-def report(request) -> None:
+def report(request: WSGIRequest) -> None:
     return None
