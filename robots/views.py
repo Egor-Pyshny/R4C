@@ -1,9 +1,7 @@
-from django.shortcuts import render
-
 # Create your views here.
-def add(request):
+def add(request) -> None:
     return None
 
 
-def report(request):
+def report(request) -> None:
     return None

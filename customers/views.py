@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 # Create your views here.
-def make_order(request):
+def make_order(request) -> None:
     return None
