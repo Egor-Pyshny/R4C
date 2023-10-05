@@ -25,6 +25,7 @@ def make_order(request: WSGIRequest) -> JsonResponse:
         response = {
             "message": "Your order is ready",
         }
+        order.robot.save()
         order.delete()
     else:
         order.save()
