@@ -15,7 +15,6 @@ tasks:
         --expand-star-imports
         --in-place
         --recursive
-        --remove-all-unused-imports
         --remove-duplicate-keys
         --remove-unused-variables
         --verbose
