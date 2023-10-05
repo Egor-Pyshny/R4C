@@ -1,0 +1,73 @@
+version: '3'
+
+output: 'prefixed'
+
+tasks:
+
+  code-format:
+    cmds:
+      - >
+        poetry run autoflake
+        --exclude '*.idea*'
+        --exclude '*.git*'
+        --exclude '*.mypy_cache*'
+        --exclude '*venv*'
+        --expand-star-imports
+        --in-place
+        --recursive
+        --remove-all-unused-imports
+        --remove-duplicate-keys
+        --remove-unused-variables
+        --verbose
+        .
+      - poetry run black .
+      - poetry run isort .
+    desc: format code with black & isort
+    dir: "."
+
+  code-lint:
+    cmds:
+      - poetry run black --check .
+      - poetry run isort --check-only .
+      - poetry run mypy
+      - poetry run flake8 ./customers/ ./orders/ ./R4C/ ./robots/ ./utils/
+    desc: sequentially applies linters
+
+  db-migrate:
+    cmds:
+      - >
+        poetry run
+        python manage.py migrate
+    desc: migrate DB
+    dir: "."
+    run: once
+
+  db-migrate-dev:
+    cmds:
+      - >
+        poetry run
+        python manage.py makemigrations
+      - task: code-format
+      - task: db-migrate
+    desc: align DB with code (for dev only!)
+    dir: "."
+    run: once
+
+  set-up:
+    cmds:
+      - poetry install
+    desc: install all necessary packages
+    dir: "."
+    run: once
+
+  run-server:
+    cmds:
+      - task: db-migrate
+      - >
+        poetry run
+        python manage.py runserver
+    desc: start server(first run task set-up)
+    dir: "."
+    run: once
+
+
