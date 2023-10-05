@@ -5,4 +5,4 @@ class OrdersConfig(AppConfig):
     name = "orders"
 
     def ready(self) -> None:
-        pass
+        from . import signals  # noqa:F401

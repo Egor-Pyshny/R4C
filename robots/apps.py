@@ -5,4 +5,4 @@ class RobotsConfig(AppConfig):
     name = "robots"
 
     def ready(self) -> None:
-        pass
+        from . import signals  # noqa:F401

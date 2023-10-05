@@ -6,16 +6,16 @@ from typing import Dict
 
 from django.core.mail import send_mail
 from django.db.models import QuerySet
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 from orders.models import Order
 from robots.models import Robot
 
 
-@receiver(post_save, sender=Robot)
+@receiver(pre_save, sender=Robot)
 def create_profile(
-    sender: Any, instance: Robot, created: Any, **kwargs: Dict[str, Any]
+    sender: Any, instance: Robot, **kwargs: Dict[str, Any]
 ) -> None:
     serial = instance.serial
     orders: QuerySet = Order.objects.filter(serial=serial).reverse()
