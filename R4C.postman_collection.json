@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "a28be6f7-ad12-4ccf-987d-6bc423e6d3b2",
+		"name": "R4C",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26822821"
+	},
+	"item": [
+		{
+			"name": "Create robot",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\":\"R2\",\r\n    \"version\":\"D2\",\r\n    \"created\": \"2023-10-04 00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/r4c/api/v1/robots/add/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"r4c",
+						"api",
+						"v1",
+						"robots",
+						"add",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"@gmail.com\",\r\n    \"serial\": \"R4-D7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/r4c/api/v1/customers/make_order/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"r4c",
+						"api",
+						"v1",
+						"customers",
+						"make_order",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
